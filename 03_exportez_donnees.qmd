@@ -1,0 +1,78 @@
+---
+title: "Exportez vos données hors de R"
+author: Marie VAUGOYEAU
+format:
+  html:
+    toc: true
+    footer: "Cours OpenClassRoom - Formatez vos données à l’aide de R"
+editor: visual
+execute:
+  echo: true
+  error: true
+  warning: true
+  message: true
+---
+
+*Ce support est à remplir en suivant le cours Initiez vous à R pour l'analyse de données - Partie 2 : Formatez vous données à l'aide de R*
+
+# Enregistrez une table sous format `csv`
+
+```{r}
+dir.create("data")
+
+write.csv(x = mixite_groupe_edf_fr, file = "data/presence_femme_edf.csv")
+
+# sans nom de ligne
+write.csv(x = mixite_groupe_edf_fr, file = "data/presence_femme_edf.csv", row.names = FALSE)
+
+# avec la virgule comme séparateur de décimale
+write.csv2(x = mixite_groupe_edf_fr, file = "data/presence_femme_edf.csv", row.names = FALSE)
+```
+
+# Enregistrez une table sous format `xslx`
+
+```{r}
+
+install.packages("writexl")
+library(writexl)
+
+write_xlsx(x = mixite_groupe_edf_fr, path = "data/presence_femme_edf.xlsx")
+
+```
+
+# Enregistrez du texte
+
+```{r}
+write(x = stereotype_genre_chiffres_cles_phrases, "doc/stereotype_genre.txt")
+```
+
+# Enregistrez une image
+
+```{r}
+
+library(magick)
+
+image_write(image = image_flop(centre_logo_oc), path = "img/centre_logo_oc_retourne.png")
+
+```
+
+# Créer un graphique et l'enregistrer
+
+```{r}
+
+library(dplyr)
+
+# création du tableau réduit aux données d'intérêt
+evolution_feminisation_encadrement <- filter(mixite_groupe_edf_fr, indicateur == "Taux de féminisation de l'encadrement")
+
+# création du graphique
+plot(x = evolution_feminisation_encadrement$annee, evolution_feminisation_encadrement$valeur_de_l_indicateur)
+## montrer comment enregistrer dans la fenêtre
+
+# Enregistrer en ligne de code
+## ouvrir le fichier
+png(file = "img/evolution_feminisation_encadrement_edf.png")
+plot(x = evolution_feminisation_encadrement$annee, evolution_feminisation_encadrement$valeur_de_l_indicateur)
+dev.off()
+
+```

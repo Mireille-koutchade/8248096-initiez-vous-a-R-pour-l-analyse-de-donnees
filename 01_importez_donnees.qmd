@@ -1,0 +1,130 @@
+---
+title: "Importez vos données dans R"
+author: Marie VAUGOYEAU
+format:
+  html:
+    toc: true
+    footer: "Cours OpenClassRoom - Formatez vos données à l’aide de R"
+editor: visual
+execute:
+  echo: true
+  error: true
+  warning: true
+  message: true
+---
+
+*Ce support est à remplir en suivant le cours Initiez vous à R pour l'analyse de données - Partie 2 : Formatez vous données à l'aide de R*
+
+# Importez un fichier `csv`
+
+Les données sont disponibles dans le dossier `data-raw`, dans [le cours d'OpenClassRoom]() et sur le site [Open data du gouvernement](https://www.data.gouv.fr/fr/datasets/mixite-dans-le-groupe-edf/).
+
+```{r}
+
+mixite_groupe_edf <- read.csv("data_raw/mixite-dans-le-groupe-edf.csv")
+
+```
+
+Contrairement à l'attendu, il n'y a qu'une seule colonne.\
+En regardant les données en cliquant dessus, vous pouvez voir des points-virgules `;` qui sépare les colonnes. Il faut donc modifier l'argument `sep` qui a pour valeur par défaut la virgule `,` pour le `;` comme ceci : `sep = ";"`.\
+La valeur des arguments par défaut peut-être vu dans la page d'aide de la fonction `help(read.csv)`.\
+L'autre possibilité est d'utiliser la fonction `read.csv2()` qui a pour valeur par défaut `sep = ";"`.
+
+```{r}
+
+mixite_groupe_edf <- read.csv("data_raw/mixite-dans-le-groupe-edf.csv", sep = ";")
+
+# ou 
+mixite_groupe_edf <- read.csv2("data_raw/mixite-dans-le-groupe-edf.csv")
+
+```
+
+# Importez un fichier `.xsls`
+
+Les données sont disponibles dans le dossier `data-raw`, dans [le cours d'OpenClassRoom]() et sur le site de [Statistiques du gouvernement Singarpourien](https://stats.mom.gov.sg/Pages/Occupational-Wages-Tables2022.aspx).
+
+```{r}
+#| error: true
+
+salaire_genre <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx")
+```
+
+La fonction `read_excel()` n'est pas chargée de base dans l'environnement car elle est contenue dans le package `{readxl}` qu'il faut installer puis appeler avec la fonction `library()`.
+
+```{r}
+install.packages("readxl")
+
+library(readxl)
+
+salaire <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx")
+
+```
+
+Par défaut, la fonction importe que la première feuille du classeur Excel qui ici contient des information sur les données et non des données. Il faut donc lui préciser la feuille que l'on souhaite avoir.
+
+```{r}
+
+salaire <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx", sheet = "T1")
+
+```
+
+Le tableau de données ne commence qu'à la ligne 5 avec le nom des colonnes puis il y a trois lignes vide.\
+L'argument `range` permet au format `Excel` de selectionne les cellules qui nous intéressent.
+
+```{r}
+
+salaire <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx", sheet = "T1", range = "B10:F352")
+
+```
+
+Le nom des colonnes vient de la première ligne. Pour modifier cela nous allons créer un vecteur avec le nom des colonnes.
+
+```{r}
+
+salaire <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx", sheet = "T1", range = "B10:F352", col_names = c("SSOC 2020",	"Occupation",	"Number Covered",	"Basic  Wage_dollard", "Gross  Wage_dollard"))
+
+# chargement des autres onglets
+salaire_homme <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx", sheet = "T1.1", range = "B10:F290", col_names = c("SSOC 2020", "Occupation",	"Number Covered",	"Basic  Wage_dollard", "Gross  Wage_dollard"))
+
+salaire_femme <- read_excel("data_raw/mrsd_2022Wages_table1.xlsx", sheet = "T1.2", range = "B10:F275", col_names = c("SSOC 2020", "Occupation",	"Number Covered",	"Basic  Wage_dollard", "Gross  Wage_dollard"))
+
+```
+
+# Importez du texte depuis une page web
+
+Vous travaillez sur les stéréotypes de genre et vous souhaitez récupérer les résultats des deux études menées en 2022 par [Ipsos](https://www.ipsos.com/fr-fr) et [ARESVI](https://aresvi.fr/) pour connaître le poids de la masculinité toxique sur les garçons en France. Cela tombe bien les informations principales sont disponibles sur le site [Ipsos](https://www.ipsos.com/fr-fr/egalite-femme-homme-un-ancrage-precoce-des-stereotypes-de-genre-chez-les-enfants) mais sous forme de texte !\
+Aucun soucis, R va vous aider à récupérer les informations.
+
+Pour cela vous allez avoir besoin du package `{rvest}` qu'il vous faut installer puis importer.
+
+```{r}
+install.packages("rvest")
+
+library(rvest)
+```
+
+```{r}
+
+stereotype_genre <- read_html("https://www.keringfoundation.org/fr/articles/d'egal-a-egale/") |> 
+  html_elements("ul") |> 
+  html_text()
+
+stereotype_genre_chiffres_cles <- stereotype_genre[2]
+
+stereotype_genre_chiffres_cles
+
+```
+
+# importez une image
+
+L'image utilisée ici est le logo d'OpenClassRoom disponible dans le sous dossier `img`.
+
+```{r}
+
+install.packages("magick")
+library(magick)
+
+logo_oc <- image_read("img/logo_oc.jpeg")
+logo_oc
+
+```

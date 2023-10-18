@@ -1,0 +1,145 @@
+---
+title: "Modifiez vos données dans R"
+author: Marie VAUGOYEAU
+format:
+  html:
+    toc: true
+    footer: "Cours OpenClassRoom - Formatez vos données à l’aide de R"
+editor: visual
+execute:
+  echo: true
+  error: true
+  warning: true
+  message: true
+---
+
+*Ce support est à remplir en suivant le cours Initiez vous à R pour l'analyse de données - Partie 2 : Formatez vous données à l'aide de R*
+
+# Modifiez les données contenues dans une table
+
+A partir du tableau de données de la représentation des femmes dans les entreprises du groupes EDF
+
+```{r}
+# nous sommes bien au bonne endroit
+mixite_groupe_edf[65, 1]
+
+# remplacement de la valeur manquante par 65
+mixite_groupe_edf[65, 1] <- 65
+# ou
+mixite_groupe_edf[65, "tri"] <- 65
+# ou encore 
+mixite_groupe_edf$tri[65] <- 65
+
+# vérification
+mixite_groupe_edf[65, "tri"]
+```
+
+Sélection des colonnes en français.
+
+```{r}
+# avec le nom des colonnes
+mixite_groupe_edf_fr <- mixite_groupe_edf[, c("tri", "annee", "perimetre_juridique", "perimetre_spatial", "indicateur", "valeur_de_l_indicateur", "unite", "methode_de_consolidation")]
+
+# ou la position des colonnes
+mixite_groupe_edf_fr <- mixite_groupe_edf[, c(1:3, 5, 7, 9, 10, 12)]
+
+```
+
+Afficher une seule ligne
+
+```{r}
+mixite_groupe_edf_fr[3,]
+```
+
+Afficher plusieurs lignes
+
+```{r}
+mixite_groupe_edf_fr[c(1:3, 6:9,11), ]
+```
+
+# Modifiez du texte dans R
+
+Nous repartons du texte importé sur le site [Kering Foundation](https://www.keringfoundation.org/fr/).
+
+```{r}
+
+install.packages(stringr)
+library(stringr)
+
+# séparer les phrases
+stereotype_genre_chiffres_cles_phrases <- 
+  str_split(
+    stereotype_genre_chiffres_cles, 
+    "\\.", 
+    simplify = TRUE
+    )
+
+# récupérer les données en pourcentages
+stereotype_genre_chiffres_cles_phrases |> 
+  str_extract(pattern = "[:digit:]+%")
+  
+# extraire le genre concerné
+stereotype_genre_chiffres_cles_phrases |> 
+  str_to_lower() |> 
+  str_extract(pattern = "fille|garçon")
+
+# concatern les informations
+str_c(
+  stereotype_genre_chiffres_cles_phrases |> 
+    str_extract(pattern = "[:digit:]+%"),
+  stereotype_genre_chiffres_cles_phrases |> 
+    str_to_lower() |> 
+    str_extract(pattern = "fille|garçon"),
+  sep = " "
+)
+
+# les NA  prennent le dessus sur les autres, il faut donc les remplacer par rien
+str_c(
+  stereotype_genre_chiffres_cles_phrases |> 
+    str_extract(pattern = "[:digit:]+%") |>
+    str_replace_na(""),
+  stereotype_genre_chiffres_cles_phrases |> 
+    str_to_lower() |> 
+    str_extract(pattern = "fille|garçon") |> 
+    str_replace_na(""),
+  sep = " "
+)
+
+```
+
+# Modifiez une image dans R
+
+## changer le format
+
+Convertir en `PNG`
+
+```{r}
+logo_oc_png <- image_convert(logo_oc, format = "png")
+logo_oc_png
+
+```
+
+## Sélectionnez une partie de l'image
+
+```{r}
+centre_logo_oc <- image_crop(logo_oc_png, "350X350+25+25")
+```
+
+## Lire du texte dans une image
+
+```{r}
+install.packages("tesseract")
+
+image_ocr(centre_logo_oc)
+
+cat(image_ocr(centre_logo_oc))
+
+```
+
+## Incliner une image
+
+```{r}
+image_flop(centre_logo_oc) |> 
+  image_ocr() |> 
+  cat()
+```
