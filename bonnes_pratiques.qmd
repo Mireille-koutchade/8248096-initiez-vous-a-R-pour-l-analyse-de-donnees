@@ -9,7 +9,7 @@ editor: visual
 
 # Introduction
 
-Le but de ce document est de garder une trace des bonnes pratiques pour coder en R en suivant le cours [Initiez-vous à R pour l'analyse de données](https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees).
+Le but de ce document est de garder une trace des bonnes pratiques pour coder en R en suivant le cours [Initiez-vous à R pour l'analyse de données](https://openclassrooms.com/fr/courses/8248096-initiez-vous-a-r-pour-lanalyse-de-donnees).
 
 # Pour éviter les erreurs
 

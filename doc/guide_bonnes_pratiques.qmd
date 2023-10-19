@@ -9,7 +9,7 @@ editor: visual
 
 # Introduction
 
-Le but de ce document est de garder une trace des bonnes pratiques pour coder en R en suivant le cours [Initiez-vous à R pour l'analyse de données](https://openclassrooms.com/fr/courses/4525256-initiez-vous-au-langage-r-pour-analyser-vos-donnees).
+Le but de ce document est de garder une trace des bonnes pratiques pour coder en R en suivant le cours [Initiez-vous à R pour l'analyse de données](https://openclassrooms.com/fr/courses/8248096-initiez-vous-a-r-pour-lanalyse-de-donnees).
 
 # Pour éviter les erreurs
 
@@ -63,58 +63,59 @@ a * 2
 
 La bonne pratique est d'utiliser les minuscules et d'écrire en `snake_case`, c'est à dire en détachant les mots écrits en minuscules par des underscores.\
 [![](https://cdn.myportfolio.com/45214904-6a61-4e23-98d6-b140f8654a40/dbb99049-2916-4bc8-824f-1816f5c4f06d.png?h=ba6a62f15223e9ba5c166341ecf935f2){width="500"}](https://allisonhorst.com/)\
-[*Artwork by \@allison_horst*](https://twitter.com/allison_horst)  
- 
-##  **Conseil n°6** : Utiliser l’autocomplétion pour éviter les fautes de frappe  
-  
-Lorsqu’on écrit du code dans RStudio, l’auto-complétion propose la fin d’un mot, d’une fonction, d’un package à partir des premières lettres tapées. L’avantage est de voir dans la fenêtre la définition de l’objet ou un aperçu.  
-  
-## **Conseil n°7** : Lisez la page d’aide avant d’utiliser une fonction pour la première fois grâce à la fonction `help()` ou l’onglet `Help`  
-  
-Les pages d’aide sont globalement toutes constituées de la même manière avec le nom de la fonction en haut à gauche et le nom du package la contenant à côté entre crochet (dans le screencast : la page d’aide de la fonction `read.csv` du package `{utils}`), sa description courte et ses utilisations. Ensuite viennent les définitions des arguments et finit par des exemples d’utilisation.  
-Vous pouvez aussi utiliser des vignettes avec la fonction `vignette()`. Les vignettes sont des pages d’aide plus documentées, développées ces dernières années sur des sujets et non une seule fonction mais pas encore généralisées à l’ensemble des packages.  
-  
-## **Conseil n°8** : Il faut lire les messages affichés dans la console  
-Lorsque le code est envoyé dans la `Console` des messages peuvent s’afficher. Il en existe trois sortes :  
+[*Artwork by \@allison_horst*](https://twitter.com/allison_horst)
 
-_ Message d’information `message()`. Très important à lire et à garder en mémoire, ils peuvent aider à comprendre ce qui se passe dans l’environnement ou certaines spécificités. Il ne bloque pas le code.  
-_ Message d’attention `warning()`. Ce message informe qu’une action à été réalisée. Ce type de message n’arrête pas le code mais il est très important de les lire.  
-_ Messages d'erreurs `error()`. Le code est arrêté et le message vous explique où et pourquoi. Plus ou moins compréhensibles en fonction des personnes qui ont développé les fonctions ils sont le premier pas pour débugger.  
-  
-Dans la vidéo tutoriel de la partie **Importez un fichier Excel dans RStudio**, vous avez un message d’erreur qui vous informe qu’il ne trouve pas la fonction `read.excel()`. En effet, pour utiliser une fonction il faut que le package soit actif dans l’environnement et donc il faut utiliser la fonction `library()` pour ouvrir le package nécessaire.  
-  
-Dans la partie **Enregistrez une image depuis RStudio** vous avez un message d’information qui vous explique qu’en chargeant le package `{dplyr}` dans l’environnement vous avez masqué les fonctions `filter()` et `lag()` du package `{stats}` et les fonctions `intersect`, `setdiff`, `setequal` et `union` présente dans le package `{base}`. Cela signifie qu’avant ou après le chargement du package `{dplyr}` le même nom de fonction n’appelle pas la même fonction derrière.  
-Imaginez que vous êtes en train de faire des travaux avec une personne, quand vous demandez un tournevis dans la salle de bain, elle vous donne toujours un plat mais dans la chambre toujours un cruciforme. Les deux tournevis sont très utiles, ce sont tous les deux des tournevis mais vous ne les utilisez pas pour la même chose. C’est pareil ici.  
-Pour être sûre d’utiliser la bonne fonction il faut préfixer en nommant le package : `dplyr::filter()` et `stats::filter()`.
-  
-# Pour aller plus loin  
-Voici pour vous une liste de ressources disponibles gratuitement sur internet pour apprendre à coder en R.  
-  
-En français :  
+## **Conseil n°6** : Utiliser l'autocomplétion pour éviter les fautes de frappe
 
-_ [Cours R pour scientifique offert par le Département de mathématiques et de statistique de l’Université Laval (Québec, Canada)](https://stt4230.rbind.io/)  
-_ [Le projet {utilitR} de l’INSEE](https://www.book.utilitr.org/)  
-_ [R pour les débutants par Emmanuel PARADIS](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_fr.pdf)  
-_ [guide-R par Joseph LARMARANG€](https://larmarange.github.io/guide-R/)  
-_ [R, Bonnes pratiques écrit par Christophe GENOLINI](https://cran.r-project.org/doc/contrib/Genolini-RBonnesPratiques.pdf)  
-_ [frrrenchies](https://github.com/frrrenchies/frrrenchies)  
-  
-En anglais :  
+Lorsqu'on écrit du code dans RStudio, l'auto-complétion propose la fin d'un mot, d'une fonction, d'un package à partir des premières lettres tapées. L'avantage est de voir dans la fenêtre la définition de l'objet ou un aperçu.
 
-_ [The tidyverse style guide](https://style.tidyverse.org/)  
-_ [Page des Posit Cheat Sheets](https://posit.co/resources/cheatsheets/)  
-_ [rOpenSci Packages: Development, Maintenance, and Peer Review par rOpenSci](https://devguide.ropensci.org/)  
-_ [R for Data Science écrit par Hadley Wickham et Garett Grolemund](https://r4ds.had.co.nz/index.html)  
-_ [From Data To Viz](https://www.data-to-viz.com/)  
-  
-Blogs :  
-  
-_ [ROpenSci (eng)](https://ropensci.org/fr/blog/)  
-_ [Posit (eng)](https://blogs.rstudio.com/ai/)  
-_ [Statistiques et R par Marie Vaugoyeau (fr)](https://mvaugoyeau.netlify.app/)  
-_ [Della Data par Claire Della Vedova (fr)](https://delladata.fr/blog/)  
-_ [R-atique par Lise Vaudor (fr)](http://perso.ens-lyon.fr/lise.vaudor/)  
-_ [ThinkR](https://thinkr.fr/blog/) & leur [blog participatif](https://rtask.thinkr.fr/fr/blog/) (niveau plus avancé généralement) (fr)  
-_ [R-bloggers (eng)](https://www.r-bloggers.com/)  
-_ [R Weekly (eng)](https://rweekly.org/)  
-  
+## **Conseil n°7** : Lisez la page d'aide avant d'utiliser une fonction pour la première fois grâce à la fonction `help()` ou l'onglet `Help`
+
+Les pages d'aide sont globalement toutes constituées de la même manière avec le nom de la fonction en haut à gauche et le nom du package la contenant à côté entre crochet (dans le screencast : la page d'aide de la fonction `read.csv` du package `{utils}`), sa description courte et ses utilisations. Ensuite viennent les définitions des arguments et finit par des exemples d'utilisation.\
+Vous pouvez aussi utiliser des vignettes avec la fonction `vignette()`. Les vignettes sont des pages d'aide plus documentées, développées ces dernières années sur des sujets et non une seule fonction mais pas encore généralisées à l'ensemble des packages.
+
+## **Conseil n°8** : Il faut lire les messages affichés dans la console
+
+Lorsque le code est envoyé dans la `Console` des messages peuvent s'afficher. Il en existe trois sortes :
+
+\_ Message d'information `message()`. Très important à lire et à garder en mémoire, ils peuvent aider à comprendre ce qui se passe dans l'environnement ou certaines spécificités. Il ne bloque pas le code.\
+\_ Message d'attention `warning()`. Ce message informe qu'une action à été réalisée. Ce type de message n'arrête pas le code mais il est très important de les lire.\
+\_ Messages d'erreurs `error()`. Le code est arrêté et le message vous explique où et pourquoi. Plus ou moins compréhensibles en fonction des personnes qui ont développé les fonctions ils sont le premier pas pour débugger.
+
+Dans la vidéo tutoriel de la partie **Importez un fichier Excel dans RStudio**, vous avez un message d'erreur qui vous informe qu'il ne trouve pas la fonction `read.excel()`. En effet, pour utiliser une fonction il faut que le package soit actif dans l'environnement et donc il faut utiliser la fonction `library()` pour ouvrir le package nécessaire.
+
+Dans la partie **Enregistrez une image depuis RStudio** vous avez un message d'information qui vous explique qu'en chargeant le package `{dplyr}` dans l'environnement vous avez masqué les fonctions `filter()` et `lag()` du package `{stats}` et les fonctions `intersect`, `setdiff`, `setequal` et `union` présente dans le package `{base}`. Cela signifie qu'avant ou après le chargement du package `{dplyr}` le même nom de fonction n'appelle pas la même fonction derrière.\
+Imaginez que vous êtes en train de faire des travaux avec une personne, quand vous demandez un tournevis dans la salle de bain, elle vous donne toujours un plat mais dans la chambre toujours un cruciforme. Les deux tournevis sont très utiles, ce sont tous les deux des tournevis mais vous ne les utilisez pas pour la même chose. C'est pareil ici.\
+Pour être sûre d'utiliser la bonne fonction il faut préfixer en nommant le package : `dplyr::filter()` et `stats::filter()`.
+
+# Pour aller plus loin
+
+Voici pour vous une liste de ressources disponibles gratuitement sur internet pour apprendre à coder en R.
+
+En français :
+
+\_ [Cours R pour scientifique offert par le Département de mathématiques et de statistique de l'Université Laval (Québec, Canada)](https://stt4230.rbind.io/)\
+\_ [Le projet {utilitR} de l'INSEE](https://www.book.utilitr.org/)\
+\_ [R pour les débutants par Emmanuel PARADIS](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_fr.pdf)\
+\_ [guide-R par Joseph LARMARANG€](https://larmarange.github.io/guide-R/)\
+\_ [R, Bonnes pratiques écrit par Christophe GENOLINI](https://cran.r-project.org/doc/contrib/Genolini-RBonnesPratiques.pdf)\
+\_ [frrrenchies](https://github.com/frrrenchies/frrrenchies)
+
+En anglais :
+
+\_ [The tidyverse style guide](https://style.tidyverse.org/)\
+\_ [Page des Posit Cheat Sheets](https://posit.co/resources/cheatsheets/)\
+\_ [rOpenSci Packages: Development, Maintenance, and Peer Review par rOpenSci](https://devguide.ropensci.org/)\
+\_ [R for Data Science écrit par Hadley Wickham et Garett Grolemund](https://r4ds.had.co.nz/index.html)\
+\_ [From Data To Viz](https://www.data-to-viz.com/)
+
+Blogs :
+
+\_ [ROpenSci (eng)](https://ropensci.org/fr/blog/)\
+\_ [Posit (eng)](https://blogs.rstudio.com/ai/)\
+\_ [Statistiques et R par Marie Vaugoyeau (fr)](https://mvaugoyeau.netlify.app/)\
+\_ [Della Data par Claire Della Vedova (fr)](https://delladata.fr/blog/)\
+\_ [R-atique par Lise Vaudor (fr)](http://perso.ens-lyon.fr/lise.vaudor/)\
+\_ [ThinkR](https://thinkr.fr/blog/) & leur [blog participatif](https://rtask.thinkr.fr/fr/blog/) (niveau plus avancé généralement) (fr)\
+\_ [R-bloggers (eng)](https://www.r-bloggers.com/)\
+\_ [R Weekly (eng)](https://rweekly.org/)
