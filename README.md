@@ -3,8 +3,7 @@
 Ce repo contient le code pour le cours [OpenClassRoom - Initiez-vous à R]()  
 ## Partie 1 - Prenez en main l’environnement R  
   
-### P1C3 : Créez votre premier projet dans R / Installez une version contrôle d’un projet   
-La version contrôle se trouve dans l'e-mail envoyé à Pierre-Benoît le 17 octobre 2023.  
+### P1C3 : Créez votre premier projet dans R / Installez une version contrôle d’un projet
 
 ### P1C4 : Créez un script dans R  
 Le script `Quarto` corrigé avec les 5 premiers conseils est disponible dans ce dossier sous le nom : [`bonnes_pratiques.qmd`](bonnes_pratiques.qmd). [`bonnes_pratiques.pdf`](bonnes_pratiques.pdf) est la version générée sous format `pdf`.  
